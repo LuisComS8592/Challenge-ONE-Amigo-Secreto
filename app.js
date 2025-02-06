@@ -25,3 +25,33 @@ function atualizarLista() {
         lista.appendChild(li);
     });
 }
+
+function sortearAmigo() {
+    if (amigos.length < 2) {
+        alert("Adicione pelo menos 2 amigos para sortear.");
+        return;
+    }
+    let sorteio = [...amigos];
+    let resultado = [];
+    
+    for (let i = 0; i < amigos.length; i++) {
+        let amigoSecreto;
+        do {
+            amigoSecreto = sorteio[Math.floor(Math.random() * sorteio.length)];
+        } while (amigoSecreto === amigos[i] || resultado.includes(amigoSecreto));
+        
+        resultado.push(amigoSecreto);
+    }
+    
+    exibirResultado(resultado);
+}
+
+function exibirResultado(resultado) {
+    const listaResultado = document.getElementById("resultado");
+    listaResultado.innerHTML = "";
+    amigos.forEach((amigo, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${amigo} -> ${resultado[index]}`;
+        listaResultado.appendChild(li);
+    });
+}
